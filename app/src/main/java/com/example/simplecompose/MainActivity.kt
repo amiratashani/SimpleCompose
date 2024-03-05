@@ -10,6 +10,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.simplecompose.ui.screens.Routes
+import com.example.simplecompose.ui.screens.Routes.USER_INPUT_SCREEN
+import com.example.simplecompose.ui.screens.Routes.WELCOME_SCREEN
+import com.example.simplecompose.ui.screens.SimpleComposeNavigationGraph
+import com.example.simplecompose.ui.screens.UserInputScreen
+import com.example.simplecompose.ui.screens.WelcomeScreen
 import com.example.simplecompose.ui.theme.SimpleComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,27 +26,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SimpleComposeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
-                }
+                SimpleComposeApp()
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-            text = "Hello $name!",
-            modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SimpleComposeTheme {
-        Greeting("Android")
+    @Composable
+    fun SimpleComposeApp() {
+        SimpleComposeNavigationGraph()
     }
 }
+
+
