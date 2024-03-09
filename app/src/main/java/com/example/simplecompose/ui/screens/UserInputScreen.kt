@@ -13,21 +13,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.simplecompose.R
 import com.example.simplecompose.data.UserDataEvents
 import com.example.simplecompose.ui.AnimalCard
 import com.example.simplecompose.ui.ButtonComponent
-import com.example.simplecompose.ui.ButtonComponentPreview
 import com.example.simplecompose.ui.TextComponent
 import com.example.simplecompose.ui.TextFieldComponent
 import com.example.simplecompose.ui.TopBar
 import com.example.simplecompose.ui.UserInputViewModel
 
 @Composable
-fun UserInputScreen(userInputViewModel: UserInputViewModel) {
+fun UserInputScreen(
+    userInputViewModel: UserInputViewModel,
+    showWelcomeScreen: (valuesPair: Pair<String, String>) -> Unit
+) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
@@ -77,8 +76,13 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel) {
             Spacer(modifier = Modifier.weight(1f))
 
             if (userInputViewModel.isValidState()) {
-                ButtonComponent{
-
+                ButtonComponent {
+                    showWelcomeScreen(
+                        Pair(
+                            userInputViewModel.uiState.value.nameEntered,
+                            userInputViewModel.uiState.value.animalSelected
+                        )
+                    )
                 }
             }
         }
@@ -88,5 +92,5 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel) {
 @Composable
 @Preview()
 fun UserInputScreenPreview() {
-    UserInputScreen(UserInputViewModel())
+    UserInputScreen(UserInputViewModel()) {}
 }

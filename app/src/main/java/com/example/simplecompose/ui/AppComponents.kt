@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,7 +32,10 @@ import androidx.compose.runtime.setValue
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -42,6 +46,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.simplecompose.R
+import com.example.simplecompose.Utils
 
 
 @Composable
@@ -170,6 +175,65 @@ fun ButtonComponent(goToDetailsScreen: () -> Unit) {
 fun ButtonComponentPreview() {
     ButtonComponent() {}
 }
+
+@Composable
+fun TextWithShadow(text: String) {
+    val shadowOffset = Offset(x = 1f, y = 2f)
+    Text(
+        text = text,
+        fontSize = 24.sp,
+        fontWeight = FontWeight.Light,
+        style = TextStyle(
+            shadow = Shadow(
+                color = Utils.generateRandomColor(),
+                offset = shadowOffset,
+                blurRadius = 2f
+            )
+        )
+    )
+}
+
+
+@Composable
+@Preview(showBackground = true)
+fun TextWithShadowPreview() {
+    TextWithShadow("Hi There test")
+}
+
+@Composable
+fun FactComposable(text:String) {
+    Card(
+        modifier = Modifier
+            .padding(32.dp)
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(8.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Column(modifier = Modifier.padding(18.dp, 24.dp)) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                contentDescription = "Quote Image",
+                modifier = Modifier.rotate(180f)
+            )
+
+            Spacer(modifier = Modifier.size(24.dp))
+            TextWithShadow(text = text)
+
+            Spacer(modifier = Modifier.size(24.dp))
+            Image(
+                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                contentDescription = "Quote Image",
+            )
+        }
+    }
+}
+
+@Composable
+@Preview // because has elevation
+fun FactComposablePreview() {
+    FactComposable("ABCD")
+}
+
 
 
 
