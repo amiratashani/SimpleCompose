@@ -143,7 +143,7 @@ fun AnimalCard(image: Int, selected: Boolean, animalSelected: (animal: String) -
                     .wrapContentHeight()
                     .clickable {
                         val animalName =
-                            if (image == R.drawable.ic_launcher_foreground) "Cat" else "Dog"
+                            if (image == R.drawable.ic_cat_icon) "Cat" else "Dog"
                         animalSelected(animalName)
                         localFocusManager.clearFocus()
                     },
@@ -157,7 +157,7 @@ fun AnimalCard(image: Int, selected: Boolean, animalSelected: (animal: String) -
 @Composable
 @Preview
 fun AnimalCardPreview() {
-    AnimalCard(R.drawable.ic_launcher_foreground, true) {}
+    AnimalCard(R.drawable.ic_cat_icon, true) {}
 }
 
 
@@ -211,7 +211,7 @@ fun FactComposable(text:String) {
     ) {
         Column(modifier = Modifier.padding(18.dp, 24.dp)) {
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                painter = painterResource(id = R.drawable.ic_quote),
                 contentDescription = "Quote Image",
                 modifier = Modifier.rotate(180f)
             )
@@ -221,7 +221,7 @@ fun FactComposable(text:String) {
 
             Spacer(modifier = Modifier.size(24.dp))
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                painter = painterResource(id = R.drawable.ic_quote),
                 contentDescription = "Quote Image",
             )
         }
